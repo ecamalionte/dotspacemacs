@@ -315,6 +315,11 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq exec-path-from-shell-check-startup-files nil)
+
+  ;; set $PATH for external commands
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize))
 
   )
 
@@ -332,9 +337,6 @@ you should place your code here."
   ;; Add Rspec package
   (require 'rspec-mode)
 
-  ;; set $PATH for external commands
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize))
 
   (require 'web-mode)
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
